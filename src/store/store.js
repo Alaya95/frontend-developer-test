@@ -109,7 +109,7 @@ const store = createStore({
     },
   },
   mutations: {
-    addProductsCart(state, data) {
+    addProductsCard(state, data) {
       state.products.push(data);
     },
     deleteProductCard(state, id) {
