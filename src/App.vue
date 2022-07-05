@@ -1,11 +1,14 @@
 <template>
   <div class="content">
+    <AddProduct />
   </div>
 </template>
 
 <script>
+import AddProduct from './components/AddProduct.vue';
 export default {
-  name: 'App',
+    name: "App",
+    components: { AddProduct }
 };
 </script>
 
