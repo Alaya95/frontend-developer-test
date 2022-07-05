@@ -1,14 +1,17 @@
 <template>
   <div class="content">
     <AddProduct />
+    <ProductCards />
   </div>
 </template>
 
 <script>
 import AddProduct from './components/AddProduct.vue';
+import ProductCards from './components/ProductCards.vue';
+
 export default {
     name: "App",
-    components: { AddProduct }
+  components: { AddProduct, ProductCards }
 };
 </script>
 
