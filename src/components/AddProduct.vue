@@ -52,9 +52,11 @@ export default {
 }
 </script>
 <style lang="scss" scoped>
-
 .form {
     width: 332px;
+    height: 100%;
+    position: sticky;
+    top: 0;
     
     &__title {
         font-weight: 600;
