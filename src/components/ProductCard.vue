@@ -1,35 +1,42 @@
 <template>
-    <div class="card" @mouseover="isVisibleBtnDelete = true" @mouseleave="isVisibleBtnDelete = false">
-        <ButtonDelete v-show="isVisibleBtnDelete" class="card__delete"></ButtonDelete>
-
-        <img class="card__img" src="../assets/product_img.png" alt="">
-
+    <div :id="product.id" ref="productId" class="card" @mouseover="isVisibleBtnDelete = true"
+        @mouseleave="isVisibleBtnDelete = false">
+        <ButtonDelete @click="removeProductCard" v-show="isVisibleBtnDelete" class="card__delete"></ButtonDelete>
+        <img class="card__img" :src="product.src" alt="">
         <div class="card__content">
-            <h4 class="card__title">Наименование товара</h4>
-            <p class="card__description ">
-                Довольно-таки интересное описание товара в несколько строк. Довольно-таки интересное
-                описание товара в несколько строк
-            </p>
-            <p class="card__price">10 000 руб.</p>
+            <h4 class="card__title">{{product.title}}</h4>
+            <p class="card__description ">{{product.description}}</p>
+            <p class="card__price">{{product.price}} руб.</p>
         </div>
-
     </div>
 </template>
+
 <script>
-import ButtonDelete from './ButtonDelete.vue'
+import { mapMutations } from 'vuex';
+import ButtonDelete from './ButtonDelete.vue';
+
 export default {
     name: "ProductCard",
     components: { ButtonDelete },
+    props: ['product'],
     data: () => {
         return {
             isVisibleBtnDelete: false
         }
     },
+    methods: {
+        ...mapMutations(['deleteProductCard']),
+        removeProductCard() {
+            const data = {
+                id: this.$refs.productId.id
+            }
+            this.deleteProductCard(data.id)
+        }
+    }
 }
 </script>
 
 <style lang="scss" scoped>
-
 .card {
     height: 423px;
     position: relative;
@@ -76,7 +83,6 @@ export default {
     &__title, &__description, &__price {
         text-align: start;
     }
-
 
     &__title {
         font-size: 20px;
