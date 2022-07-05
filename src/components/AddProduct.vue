@@ -4,28 +4,51 @@
             Добавление товара
         </div>
 
-        <form class="form__content">
+        <form id="addProductCard" class="form__content" @submit.prevent="addProduct">
             <label class="form__field-name form__field-name_circle" for="">Наименование товара</label>
-            <input class="form__field form__field-input" type="text" placeholder="Введите наименование товара" />
+            <input v-model="cardTitle" class="form__field form__field-input" type="text"
+                placeholder="Введите наименование товара" />
 
             <label class="form__field-name" for="">Описание товара</label>
-            <textarea class="form__field form__field-textarea" type="text"
+            <textarea v-model="cardDescription" class="form__field form__field-textarea" type="text"
                 placeholder="Введите описание товара"></textarea>
-
             <label class="form__field-name form__field-name_circle" for="">Ссылка на изображение товара</label>
-            <input class="form__field form__field-input" type="text" placeholder="Введите ссылку" />
-
+            <input v-model="cardSrc" class="form__field form__field-input" type="text" placeholder="Введите ссылку" />
             <label class="form__field-name form__field-name_circle" for="">Цена товара</label>
-            <input class="form__field form__field-input" type="text" placeholder="Введите цену" />
-
+            <input v-model="cardPrice" class="form__field form__field-input" type="text" placeholder="Введите цену" />
             <button class="form__btn">Добавить товар</button>
         </form>
 
     </div>
 </template>
 <script>
+import { mapMutations } from 'vuex'
+
 export default {
-    name: "AddProduct"
+    name: "AddProduct",
+    data() {
+        return {
+            errors: [],
+            cardTitle: null,
+            cardDescription: null,
+            cardSrc: null,
+            cardPrice: null,
+        } 
+    },  
+    methods: {
+        ...mapMutations(['addProductsCard']),
+        
+        addProduct() {
+            const data = {
+                id: Date(),
+                title: this.cardTitle,
+                description: this.cardDescription,
+                src: this.cardSrc,
+                price: this.cardPrice,
+            }
+            this.addProductsCard(data);
+        }
+    }
 }
 </script>
 <style lang="scss" scoped>
